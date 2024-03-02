@@ -10,7 +10,7 @@
 <?php include 'header.php'; ?>
 
 
-    <!-- サービス一覧のセクション -->
+    <!-- サービス一覧セクション -->
     <section>
         <img src="images/image 1.png" alt="are">
     </section>
