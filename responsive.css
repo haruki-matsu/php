@@ -1,0 +1,146 @@
+@media (max-width: 780px){
+
+
+/* header */
+header{
+    height: 60px;
+}
+
+header img{
+    width: 50px;
+    top: 5px;
+}
+
+header div{
+    bottom: 15px;
+}
+
+header div a{
+    margin-right: 10px; 
+    font-size: 14px;   
+}
+
+
+/*ヘッダー下背景(windowsとmacのロゴ) */
+#roguin{
+    bottom: 14px;
+    font-size: 14px;
+    padding: 5px;
+}
+
+
+/* サービス一覧セクション */
+h1{
+    font-size: 30px;
+    letter-spacing: 5px;
+    text-align: center;
+    color: #5e7fef;
+}
+
+#service{
+    background-color: white;
+    height: 580px;
+    position: relative;
+}
+
+.h2_1{
+    font-size: 20px;
+    top: 60px;
+    left: 10px;
+}
+
+table {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top:120px;
+    width: 95%;
+    border-collapse: collapse
+}
+
+table img{
+    width: 50px;
+    height: auto;
+}
+
+td {
+    border: 2px solid blue; 
+    text-align: center; 
+    margin: 10px;
+    font-size: 12px;
+}
+  
+th {
+    background-color: #5873e0; 
+    border: 1px solid rgb(255, 255, 255); 
+    color: white; 
+    font-size: 12px;
+    padding: 5px;
+}
+
+.mini_img{
+    margin-top: 10px;
+}
+
+br{
+    display: none;
+}
+
+
+ /* 入力フォームのセクション */
+#form{
+    height: 380px;
+}
+
+.h2_2{
+    font-size: 16px;
+}
+
+form{
+    right:10%;
+    width: 90%; 
+}
+
+.input-group {
+    height: 20px;
+}
+
+#message{
+    height: 100px;
+}
+
+#first_select{
+    font-size: 10px;
+}
+
+label {
+    font-size: 11px;
+}
+
+input[type="submit"] {
+    left: 50%;
+    bottom: -110px;
+    font-size: 12px;
+    padding: 6px 50px; 
+}
+
+
+/* 空白（白背景)のセクション */
+.section4{
+    height: 30px;
+}
+
+/* footer */
+
+footer{
+    height: 120px;
+}
+
+footer p {
+    font-size: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+}

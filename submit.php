@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデー�
         //メールの送信とメッセージ
         $mail->send();
 
-        header('Location: mail_complete2.php');
+        header('Location: thank_you.php');
         exit();
 
         //tryブロックで何らかのエラーが起きたら、エラーメッセージを往診
