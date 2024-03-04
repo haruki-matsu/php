@@ -1,8 +1,19 @@
+<?php
+session_start();
+
+// ワンタイムトークンを生成
+$token = bin2hex(random_bytes(32));
+
+// トークンをセッションに保存
+$_SESSION['token'] = $token;
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="responsive.css">
     <title>Document</title>
@@ -71,12 +82,13 @@
 
     <section id="form">
         <h2 class="h2_2">お問合せ</h2>
-        <form action="confirm.php" method="post">
+        <form action="contactForm_confirm.php" method="post">
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <div class=form_top>
             <div class="input-group">
                 <label for="name">氏名（必須）</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            
             <div class="input-group">
                 <label for="email">メールアドレス(必須)</label>
                 <input type="email" id="email" name="email" required>
@@ -101,7 +113,8 @@
                 <label for="message">お問い合わせ内容</label>
                 <textarea id="message" name="message"></textarea>
             </div>
-            <input type="submit" value="送信">
+            </div>
+            <input type="submit" value="送信" id="bottan">
         </form>
     </section>
 

@@ -130,7 +130,7 @@ th {
 }
 
 
-form{
+.form_top{
     position: absolute; 
     right:30%;
     width:60%; 
@@ -162,10 +162,11 @@ textarea {
     flex: 3; 
 }
 
-input[type="submit"] {
+#bottan{
     position: absolute;
-    left: 50%;
-    bottom: -265px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    bottom:15px;
     font-size: 40px;
     padding: 10px 80px; 
     cursor: pointer; 
@@ -174,6 +175,7 @@ input[type="submit"] {
     color: white;
     border: none; 
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);    
+    z-index: 1000;
 }
 
 

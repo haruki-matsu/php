@@ -1,5 +1,7 @@
 <head>
-    <link rel="stylesheet" href="php-work.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="responsive.css">
 </head>
 
 <header> 
