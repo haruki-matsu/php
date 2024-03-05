@@ -53,12 +53,14 @@ h1{
     color: #5e7fef;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: rgb(82, 202, 112);
+    font-weight: bold;
 }
 
 #service{
     background-color: white;
-    height: 1400px;
+    height: 1200px;
     position: relative;
+    margin-top: 40px;
 }
 
 .h2_1{
@@ -67,6 +69,7 @@ h1{
     font-size: 35px;
     left: 50px;
     top: 100px;
+    font-weight: bold;
 }
 
 table {
@@ -85,10 +88,21 @@ table img{
 
 td {
     border: 2px solid blue; 
-    text-align: center; 
+    vertical-align: middle;
+    text-align: center;
     margin: 10px;
     font-size: 24px;
+    padding: 10px;
   }
+
+  
+
+  .service_column{
+    text-align: left;
+  }
+
+
+
   
 th {
     background-color: #5873e0; 
@@ -104,13 +118,10 @@ th {
 
 }
   
-.mini_img{
-    margin-top: 10px;
-}
-
-.mini_img_smaller{
-    margin-top: 10px;
-    width: 70%;
+table img{
+    object-fit: contain; 
+    max-height: 150px;
+    width: auto;
 }
 
   
@@ -126,7 +137,9 @@ th {
     color:white;
     font-size: 45px;
     font-weight:normal;
-    padding:10px
+    padding:20px;
+    margin-bottom: 20px;
+    
 }
 
 
@@ -194,10 +207,13 @@ footer{
     height: 150px;
 }
 
-footer p {
+address{
     position: absolute;
+    top: 40px;
     right: 40px;
     font-size: 20px;
     color: white;
+    font-weight: bold;
+    font-style: normal;
 }
 

@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-// ワンタイムトークンを生成
+// 二重送信防止用トークンの発行
 $token = bin2hex(random_bytes(32));
 
-// トークンをセッションに保存
+// トークンをセッション変数にセット
 $_SESSION['token'] = $token;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -32,6 +33,12 @@ $_SESSION['token'] = $token;
         <h1>テクノロジーを身近に</h1>
             <h2 class="h2_1">サービス一覧</h2>
             <table>
+            <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 45%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
                 <tr>
                     <th>ラインナップ</th>
                     <th>サービス内容</th>
@@ -40,39 +47,39 @@ $_SESSION['token'] = $token;
                 </tr>
                 <tr>
                     <td>PC構築</td>
-                    <td>お客様が購入して、当店に持ち込んで<br>いただいた部品を組み立ていたします</td>
+                    <td class="service_column">お客様が購入して、当店に持ち込んでいただいた部品を組立いたします。</td>
                     <td>¥40,000-</td>
                     <td><img src="images/image 2.png" alt="デスクトップPC" class=mini_img></td>
                 </tr>
                 <tr>
                     <td>PCメンテナンス</td>
-                    <td>各部品を清掃し、劣化した部品が<br>あればリストを作成します。</td>
+                    <td class="service_column">各部品を清掃し、劣化した部品が<br>あればリストを作成します。</td>
                     <td>¥20,000-</td>
-                    <td><img src="images/image 6.png" alt="ノートPC" class=mini_img></td>
+                    <td><img src="images/image 6.png" alt="ノートPC" ></td>
                 </tr>
                 <tr>
                     <td>ソフトウェア<br>アップグレード</td>
-                    <td>1アプリあたりで、最新版に更新い<br>たします</td>
+                    <td class="service_column">1アプリあたりで、最新版に更新を<br>いたします</td>
                     <td>¥20,000-</td>
-                    <td><img src="images/image 5.png" alt="2つの円状の矢印" class=mini_img_smaller></td>
+                    <td><img src="images/image 5.png" alt="2つの円状の矢印"></td>
                 </tr>
                 <tr>
                     <td>アプリ<br>インストール</td>
-                    <td>アプリのインストールから設定まで<br>実施いたします</td>
+                    <td class="service_column">アプリのインストールから設定まで<br>実施いたします</td>
                     <td>¥4,000-</td>
-                    <td><img src="images/image 4.png" alt="APPと書かれた四角いマーク" class=mini_img></td>
+                    <td><img src="images/image 4.png" alt="APPと書かれた四角いマーク" ></td>
                 </tr>
                 <tr>
                     <td>ソフトウェア<br>開発</td>
-                    <td>お客様がご要望している製品を開発さ<br>せていただきます</td>
+                    <td class="service_column">お客様がご要望している製品を開発さ<br>せていただきます</td>
                     <td>¥400,000-</td>
-                    <td><img src="images/image 5.png" alt="ノートPCでの作業(青画面)" class=mini_img_smaller></td>
+                    <td><img src="images/image 7.png" alt="ノートPCでの作業(青画面)" ></td>
                 </tr>
                 <tr>
                     <td>サーバー<br>構築</td>
-                    <td>ご要望に沿ったサーバーを構築いたし<br>ます</td>
+                    <td class="service_column">ご要望に沿ったサーバーを構築いたし<br>ます</td>
                     <td>¥500,000-</td>
-                    <td><img src="images/image 3.png" alt="黒い箱" class=mini_img></td>
+                    <td><img src="images/image 3.png" alt="黒い箱" ></td>
                 </tr>
             </table>
             
@@ -83,7 +90,7 @@ $_SESSION['token'] = $token;
     <section id="form">
         <h2 class="h2_2">お問合せ</h2>
         <form action="contactForm_confirm.php" method="post">
-            <input type="hidden" name="token" value="<?php echo $token; ?>">
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
             <div class=form_top>
             <div class="input-group">
                 <label for="name">氏名（必須）</label>

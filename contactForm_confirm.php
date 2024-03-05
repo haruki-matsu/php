@@ -1,18 +1,6 @@
-
 <?php
 session_start();
-
-// トークンの検証
-if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-    // トークンが一致しない場合、エラーメッセージを表示
-    echo "不正なアクセスです。";
-    exit;
-}
-
-// 新しいトークンの生成とセッションへの保存
-$newToken = bin2hex(random_bytes(32));
-$_SESSION['token'] = $newToken;
-
+$token = $_SESSION['token']; 
 
 
 //XSS対策、エスケープ処理//
@@ -40,7 +28,6 @@ $_SESSION['token'] = $newToken;
     <h2>送信内容の確認</h2>
     <!-- 別のファイルにデータを送る -->
     <form action="contactForm_submit.php" method="post">
-    <input type="hidden" name="token" value="<?php echo $newToken; ?>">
         <p>名前: <?php echo $name; ?></p> <!--ユーザーが入力した名前をページに載せる-->
         <p>メールアドレス: <?php echo $email; ?></p>
         <p>カテゴリ: <?php echo $category; ?></p>
@@ -53,11 +40,13 @@ $_SESSION['token'] = $newToken;
         <input type="hidden" name="confirm_email" value="<?php echo $confirm_email; ?>">
         <input type="hidden" name="category" value="<?php echo $category; ?>">
         <input type="hidden" name="message" value="<?php echo $message; ?>">
+        
 
         <!-- 修正ボタン -->
         <button type="button" onclick="history.back()">修正する</button>
         <!-- 送信ボタン -->
         <input type="submit" value="送信する">
+        <input type="hidden" name="token" value="<?php echo $token;?>">
     </form>
     <?php include 'footer.php'; ?>
 </body>

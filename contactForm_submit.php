@@ -1,17 +1,22 @@
-<!--footer  -->
-<?php include 'header.php'; ?>
-
 <?php
-session_start(); // セッション開始
+session_start();
+
+// POSTされたトークンを取得
+$posted_token = filter_input(INPUT_POST, 'token');
+
+// セッション変数のトークンを取得
+$session_token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
 
 // トークンの検証
-if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-    echo "不正なアクセスまたは二重送信の可能性があります。";
-    exit; 
+if ($posted_token == $session_token) {
+    // トークンが一致した場合の処理（データの保存など）
+    unset($_SESSION['token']); // トークンの使用後はセッションから削除
+    header('Location: success_page.php'); // PRGパターンの実装
+    exit;
+} else {
+    // トークンが一致しない場合の処理（エラーメッセージの表示など）
+    echo '不正な送信が検出されました。';
 }
-
-// ワンタイムトークンの使用後はセッションから削除
-unset($_SESSION['token']);
 
 
 
@@ -21,6 +26,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require 'vendor/autoload.php';
+require 'config.php'; 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデータが送られてきたら
@@ -37,26 +43,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデー�
         exit;//その場合はここで終了
     }
 
-    $config = require 'config.php';
-    $mailConfig = $config['mail'];
-    $mail = new PHPMailer(true);//$mailに引数trueのPHPMailerクラスを作成
+
+    $mail = new PHPMailer(true); // $mailに引数trueのPHPMailerクラスを作成
     $mail->CharSet = 'UTF-8';
+    
+    try { // tryブロック　メール送信のための設定
+        $mail->SMTPDebug = SMTP::DEBUG_OFF; 
+        $mail->isSMTP(); 
+        $mail->Host       = $mailSenderInfo->host; // SMTPホスト
+        $mail->SMTPAuth   = true; 
+        $mail->Username   = $mailSenderInfo->username; // SMTPユーザー名
+        $mail->Password   = $mailSenderInfo->password; // SMTPパスワード
+        $mail->SMTPSecure = $mailSenderInfo->smtpSecure; // SMTPセキュリティ
+        $mail->Port       = $mailSenderInfo->port; // SMTPポート
+    
+        // 送信者、受信者のメール設定
+        $mail->setFrom($mailSenderInfo->fromEmail, $mailSenderInfo->fromName); 
+        $mail->addAddress($mailSenderInfo->fromEmail, 'haruki'); 
 
-    try {//tryブロック　メール送信のための設定
-        $mail->SMTPDebug = SMTP::DEBUG_OFF;
-        $mail->isSMTP();
-        $mail->Host       = $mailConfig['host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $mailConfig['username'];
-        $mail->Password   = $mailConfig['password'];
-        $mail->SMTPSecure = $mailConfig['smtp_secure'];
-        $mail->Port       = $mailConfig['port'];
-
-        //送信者、受信者のメール設定
-        $mail->setFrom($mailConfig['from_email'], $mailConfig['from_name']);
-        $mail->addAddress($mailConfig['add_address'], $mailConfig['add_name']);
-        
-
+    
         // メール内容の設定(自分自身あて)
         $mail->isHTML(true); 
         $mail->Subject = 'お問い合わせ分類: ' . $category;
@@ -90,6 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデー�
 } else {
     echo 'このページはPOSTメソッドでのみアクセスできます。';
 }
+
+    // セッション変数を破棄
+    $_SESSION = array();
+    session_destroy();
 ?>
 
 <!--footer  -->

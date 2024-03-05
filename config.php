@@ -6,17 +6,32 @@ use PHPMailer\PHPMailer\SMTP;
 
 require 'vendor/autoload.php';
 
+class MailSenderInfo {
+    public $host;
+    public $username;
+    public $password;
+    public $smtpSecure;
+    public $port;
+    public $fromEmail;
+    public $fromName;
 
-return [
-    'mail' => [
-        'host' => 'smtp.gmail.com',
-        'username' => 'haruharo.ee@gmail.com',
-        'password' => 'mnzm otmj pegu yuqv',
-        'smtp_secure' => PHPMailer::ENCRYPTION_STARTTLS,
-        'port' => 587,
-        'from_email' => 'haruharo.ee@gmail.com',
-        'from_name' => 'Mailer',
-        'add_address' => 'haruharo.ee@gmail.com',
-        'add_name' => 'haruki',
-    ]
-];
+    public function __construct($host, $username, $password, $smtpSecure, $port, $fromEmail, $fromName) {
+        $this->host = $host;
+        $this->username = $username;
+        $this->password = $password;
+        $this->smtpSecure = $smtpSecure;
+        $this->port = $port;
+        $this->fromEmail = $fromEmail;
+        $this->fromName = $fromName;
+    }
+}
+
+$mailSenderInfo = new MailSenderInfo(
+    'smtp.gmail.com', // SMTPホスト
+    'haruharo.ee@gmail.com', // SMTPユーザー名
+    'mnzm otmj pegu yuqv', // SMTPパスワード
+    PHPMailer::ENCRYPTION_STARTTLS, // SMTPセキュリティ
+    587, // SMTPポート
+    'haruharo.ee@gmail.com', // 送信元メールアドレス
+    'Haruki Matsumoto' // 送信元名
+);
