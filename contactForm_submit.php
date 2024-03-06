@@ -19,29 +19,28 @@ if ($posted_token == $session_token) {
 }
 
 
-
 //phpメイラーの3つのをインポート
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require 'vendor/autoload.php';
-require 'config.php'; 
+require 'mail_config.php'; 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデータが送られてきたら
-    // XSS対策、エスケープ処理
-    $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');//文字列になるようにエスケープ
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);//メール形式にあるようにサニタイズ
-    $confirm_email = filter_var($_POST['confirm_email'], FILTER_SANITIZE_EMAIL);
-    $category = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8');
-    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $formData = new FormData($_POST);
 
-    // メールアドレスが有効か、２つのメールアドレスが同じか
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $email !== $confirm_email) {
+    // メールアドレスのバリデーション
+    if (!$formData->isValidEmail()) {
         echo 'メールアドレスが無効、またはメールアドレスが一致しません。';
-        exit;//その場合はここで終了
+        exit; // その場合はここで終了
     }
+
+    // 以下、PHPMailerでのメール送信処理...
+    // $formData->name, $formData->email などを使用
+
+
 
 
     $mail = new PHPMailer(true); // $mailに引数trueのPHPMailerクラスを作成
@@ -64,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {  //もしpostメゾットでデー�
     
         // メール内容の設定(自分自身あて)
         $mail->isHTML(true); 
-        $mail->Subject = 'お問い合わせ分類: ' . $category;
-        $mail->Body    = "氏名: {$name}<br>メールアドレス: {$email}<br>メッセージ: {$message}";
+        $mail->Subject = 'お問い合わせ分類: ' . $formData->category;
+        $mail->Body    = "氏名: {$formData->name}<br>メールアドレス: {$formData->email}<br>メッセージ: {$formData->message}";
         //メールの送信とメッセージ
         $mail->send();
 
         //ここからユーザー充てのメール
         $mail->clearAddresses();  // 以前のaddAddressで追加されたアドレスをクリア
-        $mail->addAddress($email);  // ユーザーのメールアドレスを追加
+        $mail->addAddress($formData->email);  // ユーザーのメールアドレスを追加
         
         // メール内容の設定（ユーザー宛て）
         $mail->Subject = 'お問い合わせありがとうございます';

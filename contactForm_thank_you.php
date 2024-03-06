@@ -7,8 +7,9 @@
 </head>
 <body>
     <?php include 'header.php'; ?>
-    <h1>送信完了</h1>
-    <p>お問い合わせいただきありがとうございます。担当者より追ってご連絡いたします。</p>
+        <h2 class="mail_h2">送信完了</h2>
+            <p class="mail_p">お問い合わせいただきありがとうございます。担当者より追ってご連絡いたします。</p>
+            <a href="index.php" class="mail_button">トップに戻る</a>
     <?php include 'footer.php'; ?>
 </body>
 </html>

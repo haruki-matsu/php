@@ -35,3 +35,26 @@ $mailSenderInfo = new MailSenderInfo(
     'haruharo.ee@gmail.com', // 送信元メールアドレス
     'Haruki Matsumoto' // 送信元名
 );
+
+
+
+class FormData {
+    public $name;
+    public $email;
+    public $confirmEmail;
+    public $category;
+    public $message;
+
+    public function __construct($postData) {
+        $this->name = htmlspecialchars($postData['name'], ENT_QUOTES, 'UTF-8');
+        $this->email = filter_var($postData['email'], FILTER_SANITIZE_EMAIL);
+        $this->confirmEmail = filter_var($postData['confirm_email'], FILTER_SANITIZE_EMAIL);
+        $this->category = htmlspecialchars($postData['category'], ENT_QUOTES, 'UTF-8');
+        $this->message = htmlspecialchars($postData['message'], ENT_QUOTES, 'UTF-8');
+    }
+
+    public function isValidEmail() {
+        return filter_var($this->email, FILTER_VALIDATE_EMAIL) && $this->email === $this->confirmEmail;
+    }
+}
+

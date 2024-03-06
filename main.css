@@ -217,3 +217,27 @@ address{
     font-style: normal;
 }
 
+
+/* contact_confirm以降のページ */
+.mail_h2{
+    font-size: 40px;
+    color: #1717be;
+    padding: 20px;
+}
+
+.mail_p{
+    font-size: 20px;
+    margin: 10px;
+}
+
+.mail_button{
+    display: inline-block; 
+    padding: 10px 20px; /* 余白の調整 */
+    font-size: 16px; /* フォントサイズ */
+    border: 2px solid #000; /* 枠線 */
+    background-color: #fff; /* 背景色 */
+    cursor: pointer; /* カーソル */
+    outline: none; /* アウトラインの削除 */
+    background-color: #c7cee8;
+    margin: 10px;
+}
