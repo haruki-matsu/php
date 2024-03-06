@@ -19,20 +19,18 @@ $_SESSION['token'] = $newToken;
 <!--サイトデザイン-->
 <!DOCTYPE html>
 <html lang="jp">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
 <?php include 'header.php'; ?>
 <body>
-    <h2>送信内容の確認</h2>
+    <h2 class=mail_h2>送信内容の確認</h2>
     <!-- 別のファイルにデータを送る -->
     <form action="contactForm_submit.php" method="post">
-        <p>名前: <?php echo $name; ?></p> <!--ユーザーが入力した名前をページに載せる-->
-        <p>メールアドレス: <?php echo $email; ?></p>
-        <p>カテゴリ: <?php echo $category; ?></p>
-        <p>メッセージ:</p>
-        <p><?php echo nl2br($message); ?></p> <!--改行をbrに変換-->
+        <div class=mail_p>
+            <p>名前: <?php echo $name; ?></p> <!--ユーザーが入力した名前をページに載せる-->
+            <p>メールアドレス: <?php echo $email; ?></p>
+            <p>カテゴリ: <?php echo $category; ?></p>
+            <p>メッセージ:</p>
+            <p><?php echo nl2br($message); ?></p> <!--改行をbrに変換-->
+        </div>
 
         <!-- 次のファイルに送る（ユーザーに見せる必要ない) -->
         <input type="hidden" name="name" value="<?php echo $name; ?>">
@@ -41,11 +39,10 @@ $_SESSION['token'] = $newToken;
         <input type="hidden" name="category" value="<?php echo $category; ?>">
         <input type="hidden" name="message" value="<?php echo $message; ?>">
         
-
         <!-- 修正ボタン -->
-        <button type="button" onclick="history.back()">修正する</button>
+        <button type="button" class=mail_button onclick="history.back()">修正する</button>
         <!-- 送信ボタン -->
-        <input type="submit" value="送信する">
+        <input type="submit"  class=mail_button value="送信する">
         <input type="hidden" name="token" value="<?php echo $token;?>">
     </form>
     <?php include 'footer.php'; ?>
