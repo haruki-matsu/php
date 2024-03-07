@@ -1,4 +1,5 @@
 <?php
+// DB接続
 function dbc(){
  $host ="localhost";
  $dbname="php_work";
@@ -13,17 +14,16 @@ function dbc(){
  [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
  ]);
- // echo '成功';
+
  return $pdo;
  } catch (PDOException $e) {
  exit($e->getMessage());
  }
 }
 
-
+// DBに登録
 function fileSave($lineup, $servicecontents, $price, $save_path) {
     $result = false;
-    // SQL文を修正して、正しいプレースホルダーの数を指定し、不要なカンマを削除
     $sql = "INSERT INTO service_table (line_up, service_name, price, img_path) VALUES (?, ?, ?, ?)";
     try {
         $stmt = dbc()->prepare($sql);
@@ -39,18 +39,14 @@ function fileSave($lineup, $servicecontents, $price, $save_path) {
     };
 }
 
-
-
-
+//DBから取得
 function getAllfile(){
  $sql = "SELECT * FROM service_table";
  $fileData = dbc()->query($sql);
  return $fileData;
  }
 
-
-
- 
+//特定情報の取得
 function upDatefile($get_id){
  try {
  $sql = "SELECT * FROM service_table WHERE id = :id";
@@ -75,11 +71,9 @@ function upDatefile($get_id){
 
  );
  return $target_data;
-
-
-
 }
 
+//特定情報の更新
 function upDateFixfile(
     $post_id,
     $post_lineup, 
@@ -108,14 +102,12 @@ function upDateFixfile(
     }
 }
 
-
+//特定情報の削除
 function deletefile($get_id){
     $result = false;
 
-    // 画像ファイルのパスを取得するためのSQLクエリ
     $sqlSelect = "SELECT img_path FROM service_table WHERE id = :id";
     try {
-        // 画像パスの取得
         $stmtSelect = dbc()->prepare($sqlSelect);
         $stmtSelect->bindParam(":id", $get_id);
         $stmtSelect->execute();
@@ -125,7 +117,6 @@ function deletefile($get_id){
         die();
     }
     
-    // データベースからレコードを削除
     $sqlDelete = "DELETE FROM service_table WHERE id = :id";
     try {
         $stmtDelete = dbc()->prepare($sqlDelete);
@@ -136,24 +127,20 @@ function deletefile($get_id){
         die();
     }
 
-    // ファイルの存在確認と削除
     if ($result && !empty($row['img_path'])) {
-        // データベースの値から不要なパス部分を削除
         $imgPass = str_replace('./up-images/', '', $row['img_path']);
-        // 正しいフルパスを生成
         $filePath = __DIR__ . '/up-images/' . $imgPass;
         if (file_exists($filePath)) {
             unlink($filePath);
         } else {
             echo "エラー: ファイルが存在しません - " . $filePath;
         }
+    } elseif ($result) {
+        echo "正常に削除されました";
     }
-    
 }
 
-
-
-
+//エスケープ処理
 function h($s){
  return htmlspecialchars($s,ENT_QUOTES,"UTF-8");
 }

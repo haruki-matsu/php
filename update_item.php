@@ -1,8 +1,20 @@
-<?php include 'header.php'; ?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="responsive.css">
+    <title>更新ページ</title>
+</head>
 <body class=display>
-<h2 class="manage_h2">編集画面</h2>
+    <!-- ヘッダー -->
+    <?php include 'header.php'; ?>
 
-
+    <!-- 更新画面のセクション -->
+    <h2 class="f_h2">更新画面</h2>
+    <div class=f_text>
 
 <?php
  require_once "./dbc.php";
@@ -21,22 +33,22 @@
  $post_save_path = $upload_dir.$post_filename;
 
 if(empty($post_lineup)){
- array_push($err_msgs,'サービス名を入力してください。');
+ array_push($err_msgs,'ラインナップを入力してください。');
  }
  if(empty( $post_servicecontents)){
  array_push($err_msgs,'サービス内容を入力してください。');
  }
  if(empty( $post_price)){
- array_push($err_msgs,'サービス料金を入力してください。');
+ array_push($err_msgs,'料金を入力してください。');
  }
  if(strlen($post_lineup) > 255){
- array_push($err_msgs,'255 文字以内で入力');
+ array_push($err_msgs,'ラインナップは255文字以内で入力');
  }
  if(strlen($post_servicecontents) > 255){
- array_push($err_msgs,'255 文字以内で入力');
+ array_push($err_msgs,'サービス内容は255文字以内で入力');
  }
- if(strlen($post_price) > 255){
- array_push($err_msgs,'255 文字以内で入力');
+ if(strlen($post_price) > 40){
+ array_push($err_msgs,'料金が40文字以内で入力');
  }
  if($filesize > 1048576 || $file_err == 2){
  array_push($err_msgs,'ファイルサイズを 1MB 以下にすること');
@@ -52,8 +64,7 @@ if(empty($post_lineup)){
 
  if (is_uploaded_file($tmp_path)){
  if(move_uploaded_file($tmp_path,$post_save_path)){
- echo $post_filename . 'がアップロードされました。';
- echo '<br>';
+
 
  $result = upDateFixfile(
  $post_id,
@@ -64,7 +75,7 @@ if(empty($post_lineup)){
  );
 
  if($result){
- echo 'データの格納が成功しました。';
+    echo '<p>' . htmlspecialchars($post_lineup) . 'サービスの登録が完了しました。</p>';
  } else {
  echo 'データの格納が失敗しました。';
  }
@@ -86,11 +97,10 @@ if(empty($post_lineup)){
 
  }
 ?>
-<h1>更新結果</h1>
-<a href="./index.php">戻る</a> 
+    </div>
+    <a href="./index.php" class=f_button>戻る</a> 
 
-<!--　フッター -->
-<?php include 'footer.php'; ?>
-
+    <!--　フッター -->
+    <?php include 'footer.php'; ?>
 </body>
 </html>

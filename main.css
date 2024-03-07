@@ -90,18 +90,13 @@ td {
     padding: 10px;
   }
 
-  
-
   .service_column{
     text-align: left;
   }
-
-
-
   
 th {
     background-color: #5873e0; 
-    border: 1px solid rgb(255, 255, 255); 
+    border: 2px solid rgb(255, 255, 255); 
     color: white; 
     font-size: 28px;
     padding: 7px;
@@ -110,16 +105,15 @@ th {
 
 #th2{
     width: 40%;
-
 }
   
 table img{
     object-fit: contain; 
     max-height: 150px;
     width: auto;
+    max-width: 100%; 
 }
 
-  
   /* 入力フォームのセクション */
 #form{
     background-color: #4180e5;
@@ -133,10 +127,8 @@ table img{
     font-size: 45px;
     font-weight:normal;
     padding:20px;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px;  
 }
-
 
 .form_top{
     position: absolute; 
@@ -195,7 +187,6 @@ textarea {
 
 
 /* footer */
-
 footer{
     position: relative;
     background-color: #34b3f4;
@@ -213,7 +204,7 @@ address{
 }
 
 
-/* contact_confirm以降のページ */
+/* mail関連ページ */
 .mail_h2{
     font-size: 40px;
     color: #1717be;
@@ -239,13 +230,11 @@ address{
 
 
 
-/* manage以降 */
-
+/* 管理ページ */
 .table_manage {
     width: 95%;
     border-collapse: collapse
 }
-
 
 .manage_h1{
     font-size: 40px;
@@ -261,11 +250,11 @@ address{
 }
 
 .input_gray,.input_gray2{
-    background-color: #dbd8d8; /* 灰色の背景色 */
-    border: 1px solid #ddd; /* 境界線を薄い灰色に設定 */
-    padding: 8px; /* 内側の余白を設定 */
-    width: 100%; /* 入力フィールドの幅を親要素に合わせて調整 */
-    box-sizing: border-box; /* パディングと境界線を幅に含める */
+    background-color: #dbd8d8; 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    width: 100%; 
+    box-sizing: border-box; 
     height: 60px;
     font-size: 20px;
 }
@@ -276,44 +265,48 @@ address{
 }
 
 .input_gray3{
-    background-color: #dbd8d8; /* 灰色の背景色 */
-    border: 1px solid #ddd; /* 境界線を薄い灰色に設定 */
-    padding: 8px; /* 内側の余白を設定 */
-    width: 95%; /* 入力フィールドの幅を親要素に合わせて調整 */
-    box-sizing: border-box; /* パディングと境界線を幅に含める */
+    background-color: #dbd8d8; 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    width: 95%; 
+    box-sizing: border-box; 
     height: 80px;
     border-radius: 10px; 
     cursor: pointer;
 }
 
 .input_gray4{
-    background-color: #dbd8d8; /* 灰色の背景色 */
-    border: 1px solid #ddd; /* 境界線を薄い灰色に設定 */
-    padding: 8px; /* 内側の余白を設定 */
-    width: 100%; /* 入力フィールドの幅を親要素に合わせて調整 */
-    box-sizing: border-box; /* パディングと境界線を幅に含める */
+    background-color: #dbd8d8; 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    width: 100%; 
+    box-sizing: border-box; 
     height: 80px;
     border-radius: 10px; 
     cursor: pointer;
 }
 
 span{
-    background-color: #dbd8d8; /* 灰色の背景色 */
-    padding: 35px; /* 内側の余白を設定 */
-
+    background-color: #dbd8d8; 
+    padding: 30px; 
+    width: 100%; 
+    font-size: 20px;
+    margin: 0;
 }
 
-
+#image_preview{
+    padding: 5px;
+}
 
 #up_img{
         display: none
-    }
+}
 
 .apload_btn{
-    background-color: #f0f0f0; /* 灰色の背景色 */
-    border: 1px solid #ddd; /* 境界線を薄い灰色に設定 */
-    padding: 0 2px; /* 内側の余白を設定 */
-    width: 100%; /* 入力フィールドの幅を親要素に合わせて調整 */
+    background-color: #f0f0f0; 
+    border: 1px solid #ddd; 
+    padding: 0 2px; 
+    width: 100%; 
     box-sizing: border-box; 
     color: #000;
     border-radius: 10px; 
@@ -326,25 +319,23 @@ span{
 }
 
     
-    
 
-/* ファイルアップロードページ */
+/* その他サービステーブル関連ページ*/
 .f_button{
-    background-color: #f0f0f0; /* 灰色の背景色 */
+    background-color: #cfcbcb; /* 灰色の背景色 */
     padding: 20px; /* 内側の余白を設定 */
     cursor: pointer;
     font-size: 25px;
     display: inline-block;
-    margin: 40px;
-
+    margin: 80px 0 40px 40px;
+    border-radius: 10px;
 }
 
 .f_text{
     font-size: 25px;
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 80px;
 }
-
 
 .f_h2{
     font-size: 40px;
@@ -353,12 +344,6 @@ span{
     font-weight: bold;
     margin-top: 20px;
 }
-
-
-
-
-
-
 
 .display header a{
  display: none

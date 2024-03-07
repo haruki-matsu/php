@@ -1,6 +1,5 @@
 @media (max-width: 780px){
 
-
 /* header */
 header{
     height: 60px;
@@ -30,7 +29,8 @@ header div a{
 
 
 /* サービス一覧セクション */
-h1{
+
+.index_h1{
     font-size: 30px;
     letter-spacing: 5px;
     text-align: center;
@@ -39,8 +39,6 @@ h1{
 
 #service{
     background-color: white;
-    height: 580px;
-    position: relative;
 }
 
 .h2_1{
@@ -50,9 +48,7 @@ h1{
 }
 
 table {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 20px auto;
     top:120px;
     width: 95%;
     border-collapse: collapse
@@ -67,14 +63,14 @@ td {
     border: 2px solid blue; 
     text-align: center; 
     margin: 10px;
-    font-size: 12px;
+    font-size: 11px;
 }
   
 th {
     background-color: #5873e0; 
     border: 1px solid rgb(255, 255, 255); 
     color: white; 
-    font-size: 12px;
+    font-size: 11px;
     padding: 5px;
 }
 
@@ -154,9 +150,7 @@ address{
 
 
 
-
-/* contact_confirm以降のページ */
-
+/* メール関連ページ */
 .mail_h2{
     font-size: 30px;
     color: #1717be;
@@ -171,14 +165,117 @@ address{
 
 .mail_button{
     display: inline-block; 
-    padding: 5px 10px; /* 余白の調整 */
-    font-size: 10px; /* フォントサイズ */
-    border: 2px solid #000; /* 枠線 */
-    background-color: #fff; /* 背景色 */
-    cursor: pointer; /* カーソル */
-    outline: none; /* アウトラインの削除 */
+    padding: 5px 10px; 
+    font-size: 10px; 
+    border: 2px solid #000; 
+    background-color: #fff; 
+    cursor: pointer;
+    outline: none; 
     background-color: #c7cee8;
     margin: 10px;
 }
 
+.mail_h2{
+    font-size: 40px;
+    color: #1717be;
+    padding: 20px;
+}
+
+.mail_p{
+    font-size: 20px;
+    margin: 10px;
+}
+
+.mail_button{
+    display: inline-block; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border: 2px solid #000; 
+    background-color: #fff; 
+    cursor: pointer; 
+    outline: none; 
+    background-color: #c7cee8;
+    margin: 10px;
+}
+
+
+
+/* 管理ページ */
+.manage_h1{
+    font-size: 30px;
+}
+
+.manage_h2{
+    font-size: 25px;
+}
+
+.input_gray,.input_gray2{
+    height: 20px;
+    font-size: 11px;
+}
+
+.input_gray2{
+    height: 40px;
+}
+
+.input_gray3{
+    height: 40px;
+}
+
+.input_gray4{
+    height:20px;
+    padding: 0;
+}
+
+span{
+    background-color: #dbd8d8; 
+    padding: 4px;
+    font-size: 9px;
+}
+
+.apload_btn{
+    background-color: #f0f0f0; 
+    border: 1px solid #ddd; 
+    padding: 0 2px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: #000;
+    border-radius: 10px; 
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.td_button{
+    padding: 1px;
+}
+
+
+/* その他サービステーブル関連ページ */
+.f_button{
+    background-color: #cfcbcb; 
+    padding: 10px; 
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    margin: 20px 0 40px 40px;
+    border-radius: 10px;
+}
+
+.f_text{
+    font-size: 12px;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.f_h2{
+    font-size: 25px;
+    color: #3830da;
+    margin-left: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.display header a{
+ display: none
+}
 }
