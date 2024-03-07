@@ -56,7 +56,7 @@ $_SESSION['token'] = $token;
                     <td><p><?php echo h($file['line_up']); ?></p></td>
                     <td><p><?php echo h($file['service_name']); ?></p></td>
                     <td><p><?php echo h($file['price']); ?></p></td>
-                    <td><img src="<?php echo $file['img_pass']; ?>" alt="" style="width:40%;"></td>
+                    <td><img src="<?php echo $file['img_path']; ?>" alt="" style="width:40%;"></td>
                 </tr>
             <?php endforeach; ?>
             </table>

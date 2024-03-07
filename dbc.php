@@ -24,7 +24,7 @@ function dbc(){
 function fileSave($lineup, $servicecontents, $price, $save_path) {
     $result = false;
     // SQL文を修正して、正しいプレースホルダーの数を指定し、不要なカンマを削除
-    $sql = "INSERT INTO service_table (line_up, service_name, price, img_pass) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO service_table (line_up, service_name, price, img_path) VALUES (?, ?, ?, ?)";
     try {
         $stmt = dbc()->prepare($sql);
         $stmt->bindValue(1, $lineup);
@@ -66,7 +66,7 @@ function upDatefile($get_id){
  $servicename = $row['line_up'];
  $servicecontents = $row['service_name'];
  $servicecharge = $row['price'];
- $save_path = $row['img_pass'];
+ $save_path = $row['img_path'];
 
  $target_data = array($servicename,
  $servicecontents,
@@ -91,7 +91,7 @@ function upDateFixfile(
     $sql = 'UPDATE service_table SET line_up = :line_up,
     service_name = :service_name,
     price = :price,
-    img_pass = :img_pass WHERE id = :id';
+    img_path = :img_path WHERE id = :id';
     try {
         $stmt = dbc()->prepare($sql);
         $result = $stmt->execute([
@@ -99,7 +99,7 @@ function upDateFixfile(
             ':line_up' => $post_lineup,
             ':service_name' => $post_servicecontents,
             ':price' => $post_price,
-            ':img_pass' => $post_save_path
+            ':img_path' => $post_save_path
         ]);
         return $result;
     } catch (PDOException $e) {
@@ -113,7 +113,7 @@ function deletefile($get_id){
     $result = false;
 
     // 画像ファイルのパスを取得するためのSQLクエリ
-    $sqlSelect = "SELECT img_pass FROM service_table WHERE id = :id";
+    $sqlSelect = "SELECT img_path FROM service_table WHERE id = :id";
     try {
         // 画像パスの取得
         $stmtSelect = dbc()->prepare($sqlSelect);
@@ -137,9 +137,9 @@ function deletefile($get_id){
     }
 
     // ファイルの存在確認と削除
-    if ($result && !empty($row['img_pass'])) {
+    if ($result && !empty($row['img_path'])) {
         // データベースの値から不要なパス部分を削除
-        $imgPass = str_replace('./up-images/', '', $row['img_pass']);
+        $imgPass = str_replace('./up-images/', '', $row['img_path']);
         // 正しいフルパスを生成
         $filePath = __DIR__ . '/up-images/' . $imgPass;
         if (file_exists($filePath)) {

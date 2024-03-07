@@ -52,7 +52,7 @@ $files = getAllfile()->fetchAll(PDO::FETCH_ASSOC);
         <td><p><?php echo h($file['line_up']); ?></p></td>
         <td><p><?php echo h($file['service_name']); ?></p></td>
         <td><p><?php echo h($file['price']); ?></p></td>
-        <td><img src="<?php echo $file['img_pass']; ?>" alt="" style="width:40%;"></td>
+        <td><img src="<?php echo $file['img_path']; ?>" alt="" style="width:40%;"></td>
         <td><a href="edit_item.php?id=<?php echo $file['id']; ?>">編集</a></td>
         <td><a href="delete_item.php?id=<?php echo $file['id']; ?>" onClick="return confirm('削除しても良いですか？')">削除</a></td>
     </tr>
