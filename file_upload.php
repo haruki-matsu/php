@@ -11,10 +11,18 @@ $filesize = $files['size'];
 $upload_dir = './up-images/';
 $err_msgs = array();
 $save_path = $upload_dir.$filename; 
+?>
 
 
+<!DOCTYPE html>
+<html lang="jp">
+<?php include 'header.php'; ?>
+<body class=display>
+    <h2 class=f_h2>登録画面</h2>
 
+<div class=f_text>
 
+<?php
 if(empty($lineup)){
  array_push($err_msgs,'ラインナップを入力してください。');
 }
@@ -44,19 +52,17 @@ if(!in_array(strtolower($file_ext),$allow_ext)){
 if(count($err_msgs)===0){
 if (is_uploaded_file($tmp_path)){
  if(move_uploaded_file($tmp_path,$save_path)){
- echo $filename . 'がアップロードされました。';
- echo '<br>';
  $result = fileSave(
  $lineup,
  $servicecontents,
  $price,
  $save_path,
  );
- if($result){
- echo 'データの格納が成功しました。';
- } else {
- echo 'データの格納が失敗しました。';
- }
+ if ($result) {
+    echo '<p>' . htmlspecialchars($lineup) . 'サービスの更新が完了しました。</p>';
+} else {
+    echo '<p>データの格納が失敗しました。</p>';
+}
  } else {
  echo ($tmp_path .'と' . $upload_dir);
  echo 'ファイルが保存できませんでした。';
@@ -73,4 +79,12 @@ if (is_uploaded_file($tmp_path)){
  }
 }
 ?>
-<a href="./index.php">戻る</a> 
+</div>
+
+<a href="./manage.php" class=f_button>管理画面に戻る</a> 
+
+<!--　フッター -->
+<?php include 'footer.php'; ?>
+
+</body>
+</html>

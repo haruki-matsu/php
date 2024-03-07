@@ -1,3 +1,9 @@
+<?php include 'header.php'; ?>
+<body class=display>
+<h2 class="manage_h2">編集画面</h2>
+
+
+
 <?php
  require_once "./dbc.php";
 
@@ -82,3 +88,9 @@ if(empty($post_lineup)){
 ?>
 <h1>更新結果</h1>
 <a href="./index.php">戻る</a> 
+
+<!--　フッター -->
+<?php include 'footer.php'; ?>
+
+</body>
+</html>

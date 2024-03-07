@@ -31,7 +31,7 @@ $_SESSION['token'] = $token;
 
     <!-- サービス一覧セクション -->
     <section id=service>
-        <h1>テクノロジーを身近に</h1>
+        <h1 class=index_h1>テクノロジーを身近に</h1>
             <h2 class="h2_1">サービス一覧</h2>
             <table>
             <colgroup>
@@ -56,7 +56,7 @@ $_SESSION['token'] = $token;
                     <td><p><?php echo h($file['line_up']); ?></p></td>
                     <td><p><?php echo h($file['service_name']); ?></p></td>
                     <td><p><?php echo h($file['price']); ?></p></td>
-                    <td><img src="<?php echo $file['img_path']; ?>" alt="" style="width:40%;"></td>
+                    <td><img src="<?php echo $file['img_path']; ?>" alt="" ></td>
                 </tr>
             <?php endforeach; ?>
             </table>
