@@ -32,6 +32,23 @@
  $err_msgs = array();
  $post_save_path = $upload_dir.$post_filename;
 
+ $currentImagePath = '';
+ try {
+     $stmt = dbc()->prepare("SELECT img_path FROM service_table WHERE id = :id");
+     $stmt->bindValue(':id', $post_id, PDO::PARAM_INT);
+     $stmt->execute();
+     $currentImage = $stmt->fetch(PDO::FETCH_ASSOC);
+     if ($currentImage) {
+         $currentImagePath = $currentImage['img_path'];
+     }
+ } catch (PDOException $e) {
+     echo "画像パス取得エラー: " . $e->getMessage();
+     die();
+ }
+
+
+
+
 if(empty($post_lineup)){
  array_push($err_msgs,'ラインナップを入力してください。');
  }
@@ -74,11 +91,19 @@ if(empty($post_lineup)){
  $post_save_path,
  );
 
- if($result){
+ 
+if ($result) {
+    if (!empty($currentImagePath) && $currentImagePath !== $post_save_path) {
+        $oldImagePath = __DIR__ . '/' . $currentImagePath;
+        if (file_exists($oldImagePath)) {
+            unlink($oldImagePath);
+        }
+    }
     echo '<p>' . htmlspecialchars($post_lineup) . 'サービスの登録が完了しました。</p>';
- } else {
- echo 'データの格納が失敗しました。';
- }
+} else {
+    echo 'データの格納が失敗しました。';
+}
+
  } else {
  echo ($tmp_path .'と' . $upload_dir);
  echo 'ファイルが保存できませんでした。';
