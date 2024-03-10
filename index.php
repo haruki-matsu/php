@@ -47,11 +47,13 @@ $_SESSION['token'] = $token;
             <?php 
             require_once "./dbc.php"; 
             $files = getAllfile()->fetchAll(PDO::FETCH_ASSOC);       
-            foreach ($files as $file):  ?>
+            foreach ($files as $file): 
+            $formattedPrice = '¥' . number_format($file['price'], 0) . ' -'; ?>
+            
                 <tr>
                     <td><p><?php echo h($file['line_up']); ?></p></td>
                     <td><p><?php echo h($file['service_name']); ?></p></td>
-                    <td><p><?php echo h($file['price']); ?></p></td>
+                    <td><p><?php echo $formattedPrice; ?></p></td>
                     <td><img src="<?php echo $file['img_path']; ?>" alt="" ></td>
                 </tr>
             <?php endforeach; ?>

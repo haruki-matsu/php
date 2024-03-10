@@ -51,7 +51,7 @@ if(strlen($servicecontents) > 255){
  array_push($err_msgs,'サービス内容は255 文字以内で入力してください');
 }
 if(strlen($price) > 40){
- array_push($err_msgs,'料金は40文字以内で入力してください');
+ array_push($err_msgs,'金額は40文字以内で入力してください');
 }
 if($filesize > 1048576 || $file_err == 5){
  array_push($err_msgs,'ファイルサイズが5MB 以下の画像を使用してください');

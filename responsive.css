@@ -62,24 +62,18 @@ table img{
 td {
     border: 2px solid blue; 
     text-align: center; 
-    margin: 10px;
-    font-size: 11px;
+    padding: 5px;
 }
   
 th {
     background-color: #5873e0; 
     border: 1px solid rgb(255, 255, 255); 
     color: white; 
-    font-size: 11px;
     padding: 5px;
 }
 
 .mini_img{
     margin-top: 10px;
-}
-
-br{
-    display: none;
 }
 
 
@@ -138,12 +132,13 @@ label {
 /* footer */
 
 footer{
-    height: 120px;
+    height: 80px;
 }
 
 address{
-    font-size: 13px;
+    font-size: 9px;
     left: 50%;
+    top: 20px;
     transform: translateX(-50%);
     text-align: center;
 }
@@ -211,7 +206,7 @@ address{
 
 .input_gray,.input_gray2{
     height: 20px;
-    font-size: 11px;
+    font-size: 2vw;
 }
 
 .input_gray2{
@@ -220,6 +215,7 @@ address{
 
 .input_gray3{
     height: 40px;
+    color: #000;
 }
 
 .input_gray4{
@@ -242,7 +238,7 @@ span{
     color: #000;
     border-radius: 10px; 
     cursor: pointer;
-    font-size: 11px;
+    font-size: 1.5vw;
 }
 
 .td_button{

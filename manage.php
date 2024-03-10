@@ -29,7 +29,7 @@
                     <tr>
                         <td><input class=input_gray type="text" name="line_up"></td>
                         <td><textarea  class=input_gray2 type="text" name="service_contents"></textarea></td>
-                        <td><input class=input_gray type="text" name="price"></td>
+                        <td><input class=input_gray type="number" name="price"></td>
                         <td id="image_preview"><span>画像表示</span></td>
                         <td><button type="submit" class=input_gray3>登録</button></td>
                     </tr>
@@ -51,21 +51,23 @@
                 <th width="5%"></th>
             </tr>
 
-        <?php 
-        require_once "./dbc.php"; 
-        $files = getAllfile()->fetchAll(PDO::FETCH_ASSOC); 
-        foreach ($files as $file):
-        ?>
-             <tr>
-                <td><p><?php echo h($file['line_up']); ?></p></td>
-                <td><p><?php echo h($file['service_name']); ?></p></td>
-                <td><p><?php echo h($file['price']); ?></p></td>
-                <td><img src="<?php echo $file['img_path']; ?>" alt=""></td>
-                <td class=td_button><a href="edit_item.php?id=<?php echo $file['id']; ?>" class=input_gray4>編集</a></td>
-                <td class=td_button><a href="delete_item.php?id=<?php echo $file['id']; ?>"class=input_gray4 onClick="return confirm('削除しても良いですか？')" >削除</a></td>
-            </tr>
-            
-        <?php endforeach; ?>
+<?php 
+  require_once "./dbc.php"; 
+  $files = getAllfile()->fetchAll(PDO::FETCH_ASSOC); 
+  foreach ($files as $file):
+    $formattedPrice = '¥' . number_format($file['price'], 0) . ' -';
+
+      ?>
+      <tr>
+          <td><p><?php echo h($file['line_up']); ?></p></td>
+          <td><p><?php echo h($file['service_name']); ?></p></td>
+          <td><p><?php echo $formattedPrice; ?></p></td>
+          <td><img src="<?php echo $file['img_path']; ?>" alt=""></td>
+          <td class=td_button><a href="edit_item.php?id=<?php echo $file['id']; ?>" class=input_gray4>編集</a></td>
+          <td class=td_button><a href="delete_item.php?id=<?php echo $file['id']; ?>" class=input_gray4 onClick="return confirm('削除しても良いですか？')">削除</a></td>
+      </tr>
+  <?php endforeach; ?>
+  
          </table>  
     </section>
 

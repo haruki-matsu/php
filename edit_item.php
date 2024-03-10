@@ -23,6 +23,7 @@
     <h2 class="f_h2">編集画面</h2>
     <form enctype="multipart/form-data" action="update_item.php" method="post">
         <input type="hidden" name="id" value="<?php echo $get_id; ?>">
+        <input type="hidden" name="original_img" value="<?php echo $file[3]; ?>">
         <table class=table_manage>
             <tr>
                 <th width="15%">ラインナップ</th>
@@ -37,10 +38,11 @@
                 <td><input class=input_gray name="line_up" id="line_up" value="<?php echo $file[0]; ?>" class=input_gray1></td>
                 <td><input class=input_gray name="service_content" id="service-content" value="<?php echo $file[1]; ?>"></td>
                 <td><input class=input_gray name="price" id="service-charge" value="<?php echo $file[2]; ?>"></td>
-                <td id="image_preview"><span>画像表示</span></td>              
+                <td id="image_preview"><img src="<?php echo $file[3]; ?>" alt="画像"></td>      
                 <td><button type="submit" class=input_gray3>更新</button></td>
         </table> 
     </form>   
+    <a href="./manage.php" class=f_button>管理画面に戻る</a> 
 <script src="script.js"></script>
 </body>
 </html>

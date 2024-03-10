@@ -86,7 +86,7 @@ td {
     vertical-align: middle;
     text-align: center;
     margin: 10px;
-    font-size: 24px;
+    font-size: 2.2vw;
     padding: 10px;
   }
 
@@ -98,7 +98,7 @@ th {
     background-color: #5873e0; 
     border: 2px solid rgb(255, 255, 255); 
     color: white; 
-    font-size: 28px;
+    font-size: 2vw;
     padding: 7px;
     font-weight:normal
   }
@@ -284,14 +284,20 @@ address{
     height: 80px;
     border-radius: 10px; 
     cursor: pointer;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 span{
     background-color: #dbd8d8; 
     padding: 30px; 
     width: 100%; 
-    font-size: 20px;
+    font-size: 2vw;
     margin: 0;
+    white-space: nowrap; /* テキストが要素からはみ出た場合に改行を抑制 */
+    overflow: hidden; /* 要素からはみ出た内容を隠す */
+    text-overflow: ellipsis; 
 }
 
 #image_preview{
@@ -311,7 +317,7 @@ span{
     color: #000;
     border-radius: 10px; 
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1.6vw;
 }
 
 .td_button{

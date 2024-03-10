@@ -23,6 +23,7 @@
  $post_lineup = $_POST['line_up'];
  $post_servicecontents = $_POST['service_content'];
  $post_price = $_POST['price'];
+ $original_img = $_POST['original_img'];
  $files = $_FILES['up_img'];
  $post_filename = basename($files['name']);
  $tmp_path = $files['tmp_name'];
@@ -56,7 +57,7 @@ if(empty($post_lineup)){
  array_push($err_msgs,'サービス内容を入力してください。');
  }
  if(empty( $post_price)){
- array_push($err_msgs,'料金を入力してください。');
+ array_push($err_msgs,'金額を入力してください。');
  }
  if(strlen($post_lineup) > 255){
  array_push($err_msgs,'ラインナップは255文字以内で入力');
@@ -65,7 +66,7 @@ if(empty($post_lineup)){
  array_push($err_msgs,'サービス内容は255文字以内で入力');
  }
  if(strlen($post_price) > 40){
- array_push($err_msgs,'料金が40文字以内で入力');
+ array_push($err_msgs,'金額を40文字以内で入力');
  }
  if($filesize > 1048576 || $file_err == 2){
  array_push($err_msgs,'ファイルサイズを 1MB 以下にすること');
