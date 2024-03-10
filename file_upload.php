@@ -61,34 +61,47 @@ $file_ext = pathinfo($filename,PATHINFO_EXTENSION);
 if(!in_array(strtolower($file_ext),$allow_ext)){
  array_push($err_msgs,'画像ファイルを添付してください。');
 }
-if (count($err_msgs) === 0) {
-    if (is_uploaded_file($tmp_path)) {
-        if (file_exists($save_path)) {
-            array_push($err_msgs, '既に同じ画像が存在します。違う画像を入れてください。');
-        }
-    } else {
-        array_push($err_msgs, 'ファイルが選択されていません。');
-    }
+elseif (file_exists($save_path)) {
+        array_push($err_msgs, '既に同じ画像が存在します。違う画像を入れてください。');
 }
-if (count($err_msgs) > 0) {
-    foreach ($err_msgs as $msg) {
-        echo $msg;
-        echo '<br>';
-    }
-} else {
 
-    if (move_uploaded_file($tmp_path, $save_path)) {
-        $result = fileSave($lineup, $servicecontents, $price, $save_path);
-        if ($result) {
-            echo '<p>' . htmlspecialchars($lineup) . 'サービスの登録が完了しました。</p>';
+
+if(count($err_msgs)===0){
+    // 新しいファイルがアップロードされているかをチェック
+    if (is_uploaded_file($tmp_path)){
+   
+        // 登録したファイルが指定した場所に移動できているかチェック
+        if(move_uploaded_file($tmp_path,$save_path)){
+        echo '<br>';
+   
+            //DBにデータが格納されているかチェック
+            $result = fileSave(
+            $lineup,
+            $servicecontents,
+            $price,
+            $save_path,
+            );
+            if($result){
+            echo $lineup . 'の登録が完了しました。<br>';
+            } else {
+            echo 'データの格納が失敗しました。';
+            }
         } else {
-            echo '<p>データの格納が失敗しました。</p>';
-        }
-    } else {
+        echo ($tmp_path .'と' . $upload_dir);
         echo 'ファイルが保存できませんでした。';
         echo '<br>';
+        }
+    } else {
+    echo 'ファイルが選択されていません。';
+    echo '<br>';
     }
+} else {
+foreach ($err_msgs as $msg) {
+echo $msg;
+echo '<br>';
 }
+} 
+
 ?>
     </div>
     <a href="./manage.php" class=f_button>管理画面に戻る</a> 

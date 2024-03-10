@@ -31,7 +31,8 @@
  $filesize = $files['size'];
  $upload_dir = './up-images/';
  $err_msgs = array();
- $post_save_path = $upload_dir.$post_filename;
+ $save_path = $upload_dir.$post_filename;
+
 
  $currentImagePath = '';
  try {
@@ -48,80 +49,69 @@
  }
 
 
-
-
-if(empty($post_lineup)){
- array_push($err_msgs,'ラインナップを入力してください。');
- }
- if(empty( $post_servicecontents)){
- array_push($err_msgs,'サービス内容を入力してください。');
- }
- if(empty( $post_price)){
- array_push($err_msgs,'金額を入力してください。');
- }
- if(strlen($post_lineup) > 255){
- array_push($err_msgs,'ラインナップは255文字以内で入力');
- }
- if(strlen($post_servicecontents) > 255){
- array_push($err_msgs,'サービス内容は255文字以内で入力');
- }
- if(strlen($post_price) > 40){
- array_push($err_msgs,'金額を40文字以内で入力');
- }
- if($filesize > 1048576 || $file_err == 2){
- array_push($err_msgs,'ファイルサイズを 1MB 以下にすること');
- }
- $allow_ext = array('jpg','jpeg','png');
- $file_ext = pathinfo($post_filename,PATHINFO_EXTENSION);
-
- if(!in_array(strtolower($file_ext),$allow_ext)){
- array_push($err_msgs,'画像ファイルを添付してください。');
- }
-
- if(count($err_msgs)===0){
-
- if (is_uploaded_file($tmp_path)){
- if(move_uploaded_file($tmp_path,$post_save_path)){
-
-
- $result = upDateFixfile(
- $post_id,
- $post_lineup,
- $post_servicecontents,
- $post_price,
- $post_save_path,
- );
-
- 
-if ($result) {
-    if (!empty($currentImagePath) && $currentImagePath !== $post_save_path) {
-        $oldImagePath = __DIR__ . '/' . $currentImagePath;
-        if (file_exists($oldImagePath)) {
-            unlink($oldImagePath);
-        }
-    }
-    echo '<p>' . htmlspecialchars($post_lineup) . 'サービスの登録が完了しました。</p>';
-} else {
-    echo 'データの格納が失敗しました。';
+// バリデーションチェック
+if (empty($post_lineup)) {
+    array_push($err_msgs, 'ラインナップを入力してください。');
+}
+if (empty($post_servicecontents)) {
+    array_push($err_msgs, 'サービス内容を入力してください。');
+}
+if (empty($post_price)) {
+    array_push($err_msgs, '金額を入力してください。');
+}
+if (strlen($post_lineup) > 255 || strlen($post_servicecontents) > 255 || strlen($post_price) > 40) {
+    array_push($err_msgs, '入力値が長すぎます。');
+}
+if ($filesize > 1048576 || $file_err == 2) {
+    array_push($err_msgs, 'ファイルサイズを1MB以下にしてください。');
 }
 
- } else {
- echo ($tmp_path .'と' . $upload_dir);
- echo 'ファイルが保存できませんでした。';
- echo '<br>';
- }
- } else {
- echo 'ファイルが選択されていません。';
- echo '<br>';
- }
+$allow_ext = array('jpg', 'jpeg', 'png', 'gif');
+if (is_uploaded_file($tmp_path) && !in_array(strtolower(pathinfo($post_filename, PATHINFO_EXTENSION)), $allow_ext)) {
+    array_push($err_msgs, '許可された拡張子の画像ファイルを添付してください。');
+}
 
- } else {
- foreach ($err_msgs as $msg) {
- echo $msg;
- echo '<br>';
- }
+// エラーメッセージがない場合の処理
+if (count($err_msgs) === 0) {
+    // 新しいファイルがある場合は古いファイルを削除
+    if (is_uploaded_file($tmp_path) && file_exists($original_img) && $original_img !== $save_path) {
+        unlink($original_img);
+    }
 
- }
+    // ファイルがアップロードされているかチェック
+    if (is_uploaded_file($tmp_path)) {
+
+        //ファイルが移動しているかチェック
+        if (move_uploaded_file($tmp_path, $save_path)) {
+           
+            // データベースが更新しているかチェック
+            $result = upDateFixfile($post_id, $post_lineup, $post_servicecontents, $post_price, $save_path);
+            if ($result) {
+                echo $post_lineup . 'の更新が完了しました。<br>';
+            } else {
+                echo 'データの更新に失敗しました。<br>';
+            }
+        } else {
+            echo 'ファイルが保存できませんでした。<br>';
+        }
+    } elseif (!empty($original_img) && $original_img !== $save_path) {
+        // 新しいファイルがアップロードされていないが、古いファイルある場合
+        $result = upDateFixfile($post_id, $post_lineup, $post_servicecontents, $post_price,$original_img);
+        if ($result) {
+            echo $post_lineup . 'の更新が完了しました。<br>';
+        } else {
+            echo 'データの更新が失敗しました。<br>';
+        }
+    } else {
+        echo 'ファイルが選択されていません。<br>';
+    }
+} else {
+    foreach ($err_msgs as $msg) {
+        echo $msg . '<br>';
+    }
+}
+
+
 ?>
     </div>
     <a href="./index.php" class=f_button>戻る</a> 

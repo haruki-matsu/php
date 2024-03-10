@@ -103,7 +103,7 @@ function upDateFixfile(
 }
 
 //特定情報の削除
-function deletefile($get_id){
+function deletefile($get_id) {
     $result = false;
 
     $sqlSelect = "SELECT img_path FROM service_table WHERE id = :id";
@@ -112,33 +112,33 @@ function deletefile($get_id){
         $stmtSelect->bindParam(":id", $get_id);
         $stmtSelect->execute();
         $row = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+
+        $imgPath = $row ? $row['img_path'] : null;
+
     } catch (PDOException $e) {
         echo "画像パス取得エラー: " . $e->getMessage();
-        die();
+        return false; 
     }
-    
+
     $sqlDelete = "DELETE FROM service_table WHERE id = :id";
     try {
         $stmtDelete = dbc()->prepare($sqlDelete);
         $stmtDelete->bindParam(":id", $get_id);
         $result = $stmtDelete->execute();
+
+        
+        if ($result && $imgPath && file_exists($imgPath)) {
+            unlink($imgPath);
+        }
+
     } catch (PDOException $e) {
         echo "レコード削除エラー: " . $e->getMessage();
-        die();
+        return false;
     }
 
-    if ($result && !empty($row['img_path'])) {
-        $imgPass = str_replace('./up-images/', '', $row['img_path']);
-        $filePath = __DIR__ . '/up-images/' . $imgPass;
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        } else {
-            echo "エラー: ファイルが存在しません - " . $filePath;
-        }
-    } elseif ($result) {
-        echo "正常に削除されました";
-    }
+    return $result; // 処理結果を返す
 }
+
 
 //エスケープ処理
 function h($s){
