@@ -114,7 +114,7 @@ if (count($err_msgs) === 0) {
 
 ?>
     </div>
-    <a href="./index.php" class=f_button>戻る</a> 
+    <a href="./manage.php" class=f_button>戻る</a> 
 
     <!--　フッター -->
     <?php include 'footer.php'; ?>
