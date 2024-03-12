@@ -62,8 +62,8 @@ if (empty($post_price)) {
 if (strlen($post_lineup) > 255 || strlen($post_servicecontents) > 255 || strlen($post_price) > 40) {
     array_push($err_msgs, '入力値が長すぎます。');
 }
-if ($filesize > 1048576 || $file_err == 2) {
-    array_push($err_msgs, 'ファイルサイズを1MB以下にしてください。');
+if ($filesize > 5242880 || $file_err == 2) {
+    array_push($err_msgs, 'ファイルサイズを5MB以下にしてください。');
 }
 
 $allow_ext = array('jpg', 'jpeg', 'png', 'gif');
@@ -87,7 +87,7 @@ if (count($err_msgs) === 0) {
             // データベースが更新しているかチェック
             $result = upDateFixfile($post_id, $post_lineup, $post_servicecontents, $post_price, $save_path);
             if ($result) {
-                echo $post_lineup . 'の更新が完了しました。<br>';
+                echo h($post_lineup) . 'の更新が完了しました。<br>';
             } else {
                 echo 'データの更新に失敗しました。<br>';
             }
@@ -98,7 +98,7 @@ if (count($err_msgs) === 0) {
         // 新しいファイルがアップロードされていないが、古いファイルある場合
         $result = upDateFixfile($post_id, $post_lineup, $post_servicecontents, $post_price,$original_img);
         if ($result) {
-            echo $post_lineup . 'の更新が完了しました。<br>';
+            echo h($post_lineup) . 'の更新が完了しました。<br>';
         } else {
             echo 'データの更新が失敗しました。<br>';
         }

@@ -53,7 +53,7 @@ if(strlen($servicecontents) > 255){
 if(strlen($price) > 40){
  array_push($err_msgs,'金額は40文字以内で入力してください');
 }
-if($filesize > 1048576 || $file_err == 5){
+if($filesize > 5242880 || $file_err == 2){
  array_push($err_msgs,'ファイルサイズが5MB 以下の画像を使用してください');
 }
 $allow_ext = array('jpg','jpeg','png');
@@ -82,7 +82,7 @@ if(count($err_msgs)===0){
             $save_path,
             );
             if($result){
-            echo $lineup . 'の登録が完了しました。<br>';
+            echo h($lineup) . 'の登録が完了しました。<br>';
             } else {
             echo 'データの格納が失敗しました。';
             }
